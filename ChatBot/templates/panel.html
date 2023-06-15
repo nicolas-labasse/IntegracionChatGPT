@@ -1,0 +1,58 @@
+
+
+{% extends 'base.html' %}
+
+{% block contenidoPagina %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3 mt-5" style="justify-content: start;display: flex;z-index: 1;">
+      <a href="{% url 'chatbot' %}" type="button" class="btn btn-outline-light">Cambiar Tema</a>
+  </div>
+  </div>
+  <div class="row justify-content-center" style="z-index: 0;">
+    <div class="col-9 text-white">
+      {% for item in response_data %}
+        {% if item.tipo == 'tema' %}
+          <h1 class="h5">{{item.tipo|title}}</h1>
+          <p style="white-space: pre-line">{{ item.contenido }}</p>
+        {% elif item.tipo == 'ejemplo' %}
+          <h1 class="h5">{{item.tipo|title}}</h1>
+          <p style="white-space: pre-line">{{ item.contenido }}</p>
+        {% elif item.tipo == 'adicional' %}
+          <h1 class="h5">{{item.tipo|title}}</h1>
+          <p style="white-space: pre-line">{{ item.contenido }}</p>
+          {% elif item.tipo == 'ejercicio_resuelto' %}
+          <h1 class="h5">{{item.tipo|title}}</h1>
+          <p style="white-space: pre-line">{{ item.contenido }}</p>
+          {% elif item.tipo == 'ejercicio' %}
+          <h1 class="h5">{{item.tipo|title}}</h1>
+          <p style="white-space: pre-line">{{ item.contenido }}</p>
+          {% elif item.tipo == 'pregunta' %}
+          <h1 class="h5">{{item.tipo|title}}</h1>
+          <p style="white-space: pre-line">{{ item.pregunta }}</p>
+          <p style="white-space: pre-line">{{ item.contenido }}</p>
+        {% endif %}
+      {% endfor %}
+      {% if contenido_tema %}
+        <h1 class="h5">Tema</h1>
+        <p>{{ contenido_tema }}</p>
+      {% endif %}
+    </div>
+    <div class="col-9">
+      <a href="{% url 'tema' %}" type="button" class="btn btn-outline-light">Tema</a>
+      <a href="{% url 'ejercicior' %}" type="button" class="btn btn-outline-light">Ejercicio resuelto</a>
+      <a href="{% url 'ejercicio' %}" type="button" class="btn btn-outline-light">Ejercicio</a>
+      <a href="{% url 'ejemplos' %}" type="button" class="btn btn-outline-light">Ejemplos</a>
+      <a href="{% url 'adicional' %}" type="button" class="btn btn-outline-light">Adicionales</a>
+    </div>
+    <div class="col-9 mb-3">
+      <form action="{% url 'pregunta' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" class="form-control mt-2" name="user_respuesta" placeholder="Escribi tu pregunta">
+        <button type="submit" class="btn btn-outline-light mt-2">Enviar</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

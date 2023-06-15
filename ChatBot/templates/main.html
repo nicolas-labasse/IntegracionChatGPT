@@ -6,12 +6,11 @@
 <div class="container" >
   <div class="row justify-content-center" style="align-items: center;height: 80vh;">
     <div class="col-8 mt-5">
-      <div class="card p-5">
+      <div class="card p-5 shadow-lg" style="border-radius: 15px;">
         <div class="card-body p-5">
-            <h5 class="text-center mb-5">Escribi tu pregunta</h5>
-            <form method="post">
-              {% csrf_token %}
-              <input type="text" class="form-control" name="user_input" placeholder="Escribe tu pregunta">
+            <h5 class="text-center mb-5">Escribi el tema del que queres aprender</h5>
+            <form action="{% url 'panel' %}" method="get">
+              <input type="text" class="form-control" name="user_input" placeholder="Escribi el tema">
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-12"style="justify-content: center;display: flex;">
@@ -23,19 +22,6 @@
         </div>
       </div>
     </div>
-    <div class="col-6 mt-5">
-      <div class="card p-5">
-        <div class="card-body">
-            <h5 class="text-center mb-5">Respuesta</h5>
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-12"style="justify-content: center;display: flex;">
-                    <p class="text-center">{{response|safe}}</p>
-                </div>
-              </div>
-            </div>
-        </div>
-      </div>
   </div>
  
 </div>
